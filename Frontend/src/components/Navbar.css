@@ -1,0 +1,83 @@
+/* Navbar Container */
+.navbawr {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  z-index: 1000; /* Ensure it's on top of other content */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Adds a light border for separation */
+}
+
+/* Navbar Buttons */
+.navbar button {
+  background-color: rgba(85, 84, 84, 0.8); /* Semi-transparent dark color */
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Hover Effect for Navbar Buttons */
+.navbar button:hover {
+  background-color: rgba(50, 50, 50, 0.9); /* Slightly darker on hover */
+}
+
+/* Profile Icon */
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+/* Navbar Profile Section */
+.nav-profile {
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar Login Section */
+.nav-login button {
+  background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent green */
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Hover Effect for Login Button */
+.nav-login button:hover {
+  background-color: rgba(67, 160, 71, 0.9); /* Slightly darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar button {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  .navbawr {
+    flex-direction: column;
+  }
+}
