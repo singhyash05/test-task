@@ -1,4 +1,4 @@
-/* App.css */
+/* App.css
 #root, html, body {
   height: 100%;
   margin: 0;
@@ -7,6 +7,7 @@
 }
 
 /* App.css */
+/*
 .content {
   position: relative;
   display: flex;
@@ -14,8 +15,8 @@
   justify-content: center;
   align-items: center;
   height: 66vh;
-  padding: 0; /* Remove any padding if it's not needed */
-  margin: 0; /* Ensure no extra margin is applied */
+  padding: 0; 
+  margin: 0; 
 }
 
 .background-container {
@@ -24,7 +25,7 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 70vh; /* Adjust height as needed */
+  height: 70vh; 
   position: absolute;
   top: 0;
   left: 0;
@@ -33,7 +34,7 @@
 }
 
 .text-content {
-  position: relative; /* Ensure it's positioned above the background */
+  position: relative;
   z-index: 1;
   text-align: center;
   padding: 2rem;
@@ -44,9 +45,9 @@
   padding: 2rem;
   border-radius: 0.5rem;
   max-width: 800px;
-  margin: 2rem auto 0; /* Margin to ensure spacing */
+  margin: 2rem auto 0; 
   text-align: center;
-  box-sizing: border-box; /* Ensure padding is included in width/height */
+  box-sizing: border-box; 
 }
 
 .text-outline {
@@ -56,4 +57,4 @@
     -1px 1px 0 #000,
     1px 1px 0 #000;
 }
-
+ */
