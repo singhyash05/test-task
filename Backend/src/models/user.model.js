@@ -1,15 +1,18 @@
 import mongoose from 'mongoose'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
-    mailId :{
+    email :{
         type:String,
         required : true
     },
     password:{
         type:String,
         required:true,
+    },
+    token:{
+        type : String,
+        default : ''
     }
 },{timestamps:true})
 
@@ -18,5 +21,7 @@ userSchema.pre("save",async function(next){
     if(!this.isModified("password")) return next();
     this.password = bcrypt.hash(this.password,10)
 })
+
+
 
 export const User = mongoose.model('user',userSchema)

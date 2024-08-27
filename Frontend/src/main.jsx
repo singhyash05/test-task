@@ -11,6 +11,7 @@ import React from 'react'
 import LoginPage from './LoginPage.jsx'
 import RegisterPage from './RegisterPage.jsx'
 import Dashboard from './Dashboard.jsx'
+import GenerateNDApage from './generateNDApage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path:'/register',
     element:<RegisterPage/>
+  },
+  {
+    path:'/generateNDA',
+    element:<GenerateNDApage/>
   }
 ])
 

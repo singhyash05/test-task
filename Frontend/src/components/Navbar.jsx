@@ -1,6 +1,7 @@
 import React from 'react';
 // import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom';
 // import { useAuth } from './AuthContext';
 // import profileIcon from '../src/Assets/user_icon.jpg';
 
@@ -13,9 +14,9 @@ const Navbar = () => {
 //     logout();
 //   };
 
-//   const handleJoinUsClick = () => {
-//     navigate('/user/login');
-//   };
+  const handleLogin = () => {
+    navigate('/login');
+  };
 
 //   const handleMarketplaceClick = () => {
 //     navigate('/marketplace');
@@ -41,13 +42,14 @@ const Navbar = () => {
 //     navigate('/user/userProfile');
 //   };
 
+  const navigate = useNavigate()
+
   return (
     <div className='navbawr'>
         <h1 className=' font-thin  size-fit'>Non Disclosure Agreement Generator</h1>
       {/* <a className="navbar-text" onClick={handleHomeClick}>CRYPTOCRITTERS</a> */}
       <div className="navbar">
-      <button>Login</button>
-      <button>Logout</button>
+      <button onClick={handleLogin}>Login</button>
         {/* <button onClick={handleMarketplaceClick}>Marketplace</button>
         <button onClick={handleLeaderboardClick}>Leaderboard</button>
         <button onClick={handleHowToPlayClick}>How To Play</button>

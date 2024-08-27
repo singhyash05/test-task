@@ -7,6 +7,10 @@ const fileSchema = new mongoose.Schema({
     },
     fileName : {
         type: String
+    },
+    fileOwner:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
     }
 },{timestamps:true})
 
