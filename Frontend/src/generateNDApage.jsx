@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Groq from "groq-sdk";
 import { knowledgeBase } from './knowledgeBase';
+import whatsappQRTwilio from '../src/components/whatsappQRTwilio.png'
 
 const apiKey  = import.meta.env.VITE_API_KEY_GROQ;
 
@@ -136,52 +137,42 @@ const Chatbot = () => {
                             Generate PDF
                         </button>
 
-                        <h2> Before Clicking on Generate PDF , when you review your NDA enter like : in HTML Format then generate</h2>
+                        <h2> Before Clicking on Generate PDF , when you review your NDA enter : 'in HTML' then generate</h2>
                     </div>
                 )}
             </div>
-
-            <div>
-                    <input
-            type="text"
-            className="flex-grow p-2 border border-gray-300 rounded-l-lg"
-            value={phoneNumber}
-            onChange={(e) => {
-                const value = e.target.value;
-                setPhoneNumber(value);
-                // Validate phone number
-                setIsButtonDisabled(value.length !== 10);
-            }}
-            placeholder="Enter 10-digit phone number..."
-            maxLength="10" // Limits input to 10 digits
-        />
-
-            </div>
             {pdfLink && (
-    <div className="mt-4">
-        <input
-            type="text"
-            className="flex-grow p-2 border border-gray-300 rounded-l-lg"
-            value={phoneNumber}
-            onChange={(e) => {
-                const value = e.target.value;
-                setPhoneNumber(value);
-                setIsButtonDisabled(value.length !== 10);
-            }}
-            placeholder="Enter 10-digit phone number..."
-            maxLength="10" // Limits input to 10 digits
-        />
-        <button
-            className={`p-2 mt-2 ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'} text-white rounded-lg`}
-            onClick={handleSendWhatsApp}
-            disabled={isButtonDisabled}
-        >
-            Send PDF via WhatsApp
-        </button>
+                <div className="mt-4">
+                    <img 
+                src={whatsappQRTwilio} 
+                alt="WhatsApp QR Code for Twilio"
+                style={{ width: '200px', height: '200px' }} // Optional styling
+                />
+                    <br></br>
+                    <h2>To send through whatsapp scan this qr</h2>
+                    <div></div>
+                    <input
+                        type="text"
+                        className="flex-grow p-2 border border-gray-300 rounded-l-lg"
+                        value={phoneNumber}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setPhoneNumber(value);
+                            setIsButtonDisabled(value.length !== 10);
+                        }}
+                        placeholder="Enter 10-digit phone number..."
+                        maxLength="10" // Limits input to 10 digits
+                    />
+                    <button
+                        className={`p-2 mt-2 ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'} text-white rounded-lg`}
+                        onClick={handleSendWhatsApp}
+                        disabled={isButtonDisabled}
+                    >
+                        Send PDF via WhatsApp
+                    </button>
+                </div>
+            )}
     </div>
-)}
-
-        </div>
     );
 };
 
