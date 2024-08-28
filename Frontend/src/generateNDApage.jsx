@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Document, Page, Text, View } from '@react-pdf/renderer';
 import Groq from "groq-sdk";
 import { knowledgeBase } from './knowledgeBase';
-import parse from 'html-react-parser'; 
 
 const apiKey  = import.meta.env.VITE_API_KEY_GROQ;
 
@@ -11,6 +9,9 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([{ text: 'Hello! How can I assist you today?', sender: 'bot' }]);
     const [input, setInput] = useState('');
     const [finalNDA, setFinalNDA] = useState('');
+    const [pdfLink,setPdfLink] = useState(null)
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const groq = new Groq({ apiKey: `${apiKey}`, dangerouslyAllowBrowser: true });
 
@@ -61,15 +62,34 @@ const Chatbot = () => {
 
     const handleGeneratePDF = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/generate-pdf', {
+            // console.log(1)
+            const pdfURL = await axios.post('http://localhost:5000/generate-pdf', {
                 htmlContent: finalNDA,
             });
-
-            console.log('PDF saved at:', response.data.filePath);
+            // console.log(2)
+            console.log('pdf url: ',pdfURL.data.pdfUrl)            
+            setPdfLink(pdfURL.data.pdfUrl)
         } catch (error) {
             console.error('Error generating PDF:', error);
         }
     };
+
+    const handleSendWhatsApp = async () => {
+        if (phoneNumber.length === 10) {
+            try {
+                await axios.post('http://localhost:5000/send-whatsapp', {
+                    phoneNumber: `${phoneNumber}`, 
+                    pdfUrl: pdfLink,
+                });
+                alert('PDF link sent via WhatsApp!');
+            } catch (error) {
+                console.error('Error sending WhatsApp message:', error);
+            }
+        } else {
+            alert('Please enter a valid 10-digit phone number.');
+        }
+    };
+    
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
@@ -115,9 +135,52 @@ const Chatbot = () => {
                         >
                             Generate PDF
                         </button>
+
+                        <h2> Before Clicking on Generate PDF , when you review your NDA enter like : in HTML Format then generate</h2>
                     </div>
                 )}
             </div>
+
+            <div>
+                    <input
+            type="text"
+            className="flex-grow p-2 border border-gray-300 rounded-l-lg"
+            value={phoneNumber}
+            onChange={(e) => {
+                const value = e.target.value;
+                setPhoneNumber(value);
+                // Validate phone number
+                setIsButtonDisabled(value.length !== 10);
+            }}
+            placeholder="Enter 10-digit phone number..."
+            maxLength="10" // Limits input to 10 digits
+        />
+
+            </div>
+            {pdfLink && (
+    <div className="mt-4">
+        <input
+            type="text"
+            className="flex-grow p-2 border border-gray-300 rounded-l-lg"
+            value={phoneNumber}
+            onChange={(e) => {
+                const value = e.target.value;
+                setPhoneNumber(value);
+                setIsButtonDisabled(value.length !== 10);
+            }}
+            placeholder="Enter 10-digit phone number..."
+            maxLength="10" // Limits input to 10 digits
+        />
+        <button
+            className={`p-2 mt-2 ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'} text-white rounded-lg`}
+            onClick={handleSendWhatsApp}
+            disabled={isButtonDisabled}
+        >
+            Send PDF via WhatsApp
+        </button>
+    </div>
+)}
+
         </div>
     );
 };
